@@ -31,8 +31,6 @@ Please read and follow our [Code of Conduct](CODE_OF_CONDUCT.md) to foster an op
 ## Development Setup
 
 1. Clone the repository
-2. Install dependencies: `pip install -r requirements.txt`
-3. Set up your development environment (details in our [Development Guide](DEVELOPMENT.md))
 
 ## Style Guidelines
 
