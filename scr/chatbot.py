@@ -24,56 +24,51 @@ if user_name and user_age and user_gender:
 
     # 법률 정보 벡터 DB 로드 함수
     def load_vector_db():
-        df = pd.read_csv("law_data.csv")  # 법률 정보 데이터 불러오기
-        documents = [Document(page_content=f"질문: {row['Text']}\n답변: {row['Completion']}", metadata={"source": f"row_{i}"}) for i, row in df.iterrows()]
+        try:
+            df = pd.read_csv("law_data.csv")  # 법률 정보 데이터 불러오기
+            documents = [
+                Document(
+                    page_content=f"질문: {row['Text']}\n답변: {row['Completion']}", 
+                    metadata={"source": f"row_{i}"}
+                ) 
+                for i, row in df.iterrows()
+            ]
 
-        model_name = "sentence-transformers/LaBSE"
-        model_kwargs = {'device': 'cpu'}
-        encode_kwargs = {'normalize_embeddings': False}
-        embeddings = HuggingFaceEmbeddings(
-            model_name=model_name,
-            model_kwargs=model_kwargs,
-            encode_kwargs=encode_kwargs
-        )
-
-        vectors = FAISS.from_documents(documents, embeddings)
-        return vectors
+            model_name = "sentence-transformers/LaBSE"
+            embeddings = HuggingFaceEmbeddings(model_name=model_name)
+            vectors = FAISS.from_documents(documents, embeddings)
+            return vectors
+        except FileNotFoundError:
+            st.error("법률 정보 데이터 파일을 찾을 수 없습니다. 'law_data.csv' 파일을 확인하세요.")
+            return None
+        except Exception as e:
+            st.error(f"벡터 DB 로드 중 오류가 발생했습니다: {e}")
+            return None
 
     # 벡터 DB 로드
     vector_db = load_vector_db()
 
+    if vector_db is None:
+        st.stop()
+
     # 트랜스포머 모델 로드
-    tokenizer = AutoTokenizer.from_pretrained("facebook/rag-token-nq")
-    model = AutoModelForSeq2SeqLM.from_pretrained("facebook/rag-token-nq")
-
-    # 기본 프롬프트 템플릿
-    prompt_template = """
-    당신은 법률 전문가이자 심리 상담 전문가입니다. 법률에 관한 질문에 해당 **{context}**를 철저히 검토하고,
-    정확하고 명확한 법률적 조언을 제공해주세요. 심리 상담에 대해서는 공감적이고 이해하기 쉬운 방식으로 대화해주세요.
-    특히, 법적 용어와 개념을 이해하기 쉽도록 자세히 설명하고, 질문에 직접적으로 답변하는게 중요합니다.
-    상대방의 연령과 상황에 맞는 말투와 설명 방식을 사용해 자연스럽고 인간적인 대화를 이어가세요.
-
-    question: {question}
-
-    Assistant: """
-
-    PROMPT = PromptTemplate(
-        template=prompt_template, input_variables=["question"]
-    )
-
-    # 대화형 체인 설정
-    chain = ConversationalRetrievalChain.from_llm(
-        llm=model,
-        retriever=vector_db.as_retriever(),
-        combine_docs_chain_kwargs={"prompt": PROMPT}
-    )
+    try:
+        tokenizer = AutoTokenizer.from_pretrained("facebook/rag-token-nq")
+        model = AutoModelForSeq2SeqLM.from_pretrained("facebook/rag-token-nq")
+    except Exception as e:
+        st.error(f"모델 로드 중 오류가 발생했습니다: {e}")
+        st.stop()
 
     # 질문 처리 함수 정의
     def chat(query):
-        inputs = tokenizer(query, return_tensors="pt")
-        outputs = model.generate(**inputs)
-        result = tokenizer.decode(outputs[0], skip_special_tokens=True)
-        return result
+        try:
+            inputs = tokenizer(query, return_tensors="pt")
+            outputs = model.generate(**inputs)
+            result = tokenizer.decode(outputs[0], skip_special_tokens=True)
+            return result
+        except Exception as e:
+            st.error(f"챗봇 응답 생성 중 오류가 발생했습니다: {e}")
+            return "오류가 발생했습니다. 다시 시도해주세요."
 
     # 대화 기록 초기화
     if 'history' not in st.session_state:
