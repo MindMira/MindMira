@@ -57,7 +57,10 @@ It also applies to individuals representing **MindMira** in public forums, inclu
 ### **4. Permanent Ban**
 - **Community Impact**: A pattern of violations, including sustained inappropriate behavior, harassment, or aggression.
 - **Consequence**: Permanent exclusion from all participation in the community.
-
+- 
+### **5. collaborative work rules**
+- **collaborative work rules**: When revising a collaboration, sharing the modifications clearly and specifically through a commit message or explanation. This allows all team members to clearly understand the changes and contribute to the project.
+  
 ---
 
 
