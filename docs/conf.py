@@ -31,10 +31,9 @@ release = '1.0'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    'sphinx.ext.autodoc',       # 자동 API 문서화를 위해
-    'sphinx.ext.napoleon',      # Google 스타일과 NumPy 스타일 docstring 지원
-    'sphinx.ext.viewcode',      # 소스 코드 보기 기능
-    'sphinx.ext.todo',          # TODO 항목을 표시하기 위해
+    'sphinx.ext.autodoc',
+    'sphinx.ext.napoleon',
+    'sphinx.ext.viewcode',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
