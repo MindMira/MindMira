@@ -6,9 +6,13 @@
 
 # -- Path setup --------------------------------------------------------------
 
+# -- Path setup --------------------------------------------------------------
+
 import os
 import sys
-sys.path.insert(0, os.path.abspath('.'))  # 현재 디렉토리를 sys.path에 추가
+# 프로젝트 루트 디렉토리와 'scr/' 디렉토리를 sys.path에 추가
+sys.path.insert(0, os.path.abspath('..'))
+sys.path.insert(0, os.path.abspath('../scr'))
 
 
 # -- Project information -----------------------------------------------------
