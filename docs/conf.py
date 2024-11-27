@@ -1,0 +1,2 @@
+cd docs
+sphinx-quickstart
