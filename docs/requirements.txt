@@ -1,5 +1,4 @@
 sphinx
 sphinx-rtd-theme
-sphinx-autodoc
 sphinx-napoleon
 sphinx-viewcode
