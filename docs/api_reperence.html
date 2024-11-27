@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>API Reference &#8212; MindMira 0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=12dfc556" />
+    <script src="_static/documentation_options.js?v=2709fde1"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="api-reference">
+<h1>API Reference<a class="headerlink" href="#api-reference" title="Link to this heading">¶</a></h1>
+<p>This section describes the APIs and key functionalities provided by MindMira.</p>
+<section id="endpoints">
+<h2>Endpoints<a class="headerlink" href="#endpoints" title="Link to this heading">¶</a></h2>
+<ol class="arabic">
+<li><p><strong>/analyze_emotion</strong>
+- <strong>Method</strong>: POST
+- <strong>Description</strong>: Analyzes the user’s input to detect emotional states.
+- <strong>Request Body</strong>:</p>
+<blockquote>
+<div><p><a href="#id1"><span class="problematic" id="id2">``</span></a><a href="#id3"><span class="problematic" id="id4">`</span></a>json
+{</p>
+<blockquote>
+<div><p>“text”: “I feel stressed and anxious.”</p>
+</div></blockquote>
+</div></blockquote>
+<ul>
+<li><p><strong>Response</strong>:
+<a href="#id5"><span class="problematic" id="id6">``</span></a><a href="#id7"><span class="problematic" id="id8">`</span></a>json
+{</p>
+<blockquote>
+<div><p>“emotion”: “stressed”,
+“confidence”: 0.95</p>
+</div></blockquote>
+</li>
+</ul>
+</li>
+<li><p><strong>/generate_response</strong>
+- <strong>Method</strong>: POST
+- <strong>Description</strong>: Generates a chatbot response based on user input.
+- <strong>Request Body</strong>:</p>
+<blockquote>
+<div><p><a href="#id9"><span class="problematic" id="id10">``</span></a><a href="#id11"><span class="problematic" id="id12">`</span></a>json
+{</p>
+<blockquote>
+<div><p>“text”: “What should I do to feel better?”</p>
+</div></blockquote>
+</div></blockquote>
+<ul>
+<li><p><strong>Response</strong>:
+<a href="#id13"><span class="problematic" id="id14">``</span></a><a href="#id15"><span class="problematic" id="id16">`</span></a>json
+{</p>
+<blockquote>
+<div><p>“response”: “Try taking deep breaths and focusing on positive thoughts.”</p>
+</div></blockquote>
+</li>
+</ul>
+</li>
+<li><p><strong>/log_session</strong>
+- <strong>Method</strong>: POST
+- <strong>Description</strong>: Logs the user’s current session for analysis and future improvement.
+- <strong>Request Body</strong>:</p>
+<blockquote>
+<div><p><a href="#id17"><span class="problematic" id="id18">``</span></a><a href="#id19"><span class="problematic" id="id20">`</span></a>json
+{</p>
+<blockquote>
+<div><p>“user_id”: “12345”,
+“conversation”: [</p>
+<blockquote>
+<div><p>{“text”: “I feel sad.”, “emotion”: “sad”},
+{“text”: “What can I do?”, “response”: “Try to talk to someone you trust.”}</p>
+</div></blockquote>
+<p>]</p>
+</div></blockquote>
+</div></blockquote>
+<ul>
+<li><p><strong>Response</strong>:
+<a href="#id21"><span class="problematic" id="id22">``</span></a><a href="#id23"><span class="problematic" id="id24">`</span></a>json
+{</p>
+<blockquote>
+<div><p>“status”: “success”,
+“message”: “Session logged successfully.”</p>
+</div></blockquote>
+</li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="how-to-use-the-apis">
+<h2>How to Use the APIs<a class="headerlink" href="#how-to-use-the-apis" title="Link to this heading">¶</a></h2>
+<ul>
+<li><p><strong>Authorization</strong>: Currently, no authentication is required, but future versions may include token-based authentication.</p></li>
+<li><p><strong>Testing</strong>: APIs can be tested using tools like <cite>Postman</cite> or <cite>cURL</cite>.</p></li>
+<li><p><strong>Error Handling</strong>:
+- Example error response:</p>
+<blockquote>
+<div><p><a href="#id25"><span class="problematic" id="id26">``</span></a><a href="#id27"><span class="problematic" id="id28">`</span></a>json
+{</p>
+<blockquote>
+<div><p>“error”: “Invalid input format”,
+“status_code”: 400</p>
+</div></blockquote>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="future-enhancements">
+<h2>Future Enhancements<a class="headerlink" href="#future-enhancements" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Additional APIs for user profiling and personalized recommendations.</p></li>
+<li><p>Integration with third-party services for deeper emotional analysis.</p></li>
+<li><p>Real-time API documentation using tools like Swagger.</p></li>
+</ul>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">MindMira</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About the Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="how_to_use.html">How to Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="maintenance.html">Maintenance and Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contribution.html">Contribution Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions (FAQ)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="release_notes.html">Release Notes</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, rudals6151.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.3.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+      |
+      <a href="_sources/api_reperence.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
