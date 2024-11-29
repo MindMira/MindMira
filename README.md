@@ -23,6 +23,6 @@ MindMira is a psychological support chatbot designed to help Korean university s
 ## Documentation
 For more details, check out the following link:
 
-- [**Project Documentation (ReadTheDocs)**](https://rtd.readthedocs.io/)
+- [**Project Documentation (ReadTheDocs)**](https://mindmira.readthedocs.io/en/latest/)
   
 Join us in making mental health support accessible and tailored for students!😊
